@@ -5,7 +5,24 @@
   "main": "index.js",
   "repository": "git@github.com:andyinabox/bodiesin.space",
   "author": "Andy Dayton <amdayton@gmail.com>",
+  "scripts": {
+    "start": "budo-less index.js --less styles.less -H localhost --live --open -- -t babelify | garnish",
+    "build": "npm run styles; budo-demo index.js -c styles.css -m -- -t babelify",
+    "styles": "lessc styles.less styles.css",
+    "deploy": "npm run build; gh-pages -d dist; npm run clean",
+    "clean": "rm -r dist; rm styles.css"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.24.0",
+    "babelify": "^7.3.0",
+    "budo-demo": "^0.1.3",
+    "budo-less": "^1.0.1",
+    "gh-pages": "^0.12.0",
+    "hbsify": "^1.0.1",
+    "less": "^2.7.2"
+  },
   "dependencies": {
-    "gh-pages": "^0.12.0"
+    "promise-polyfill": "^6.0.2",
+    "whatwg-fetch": "^2.0.3"
   }
 }
