@@ -15,13 +15,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var artTpl = require('./tpl/art.hbs');
 
+// openframe api
 var OF_PATH = 'https://api.openframe.io/v0/frames/';
 var PORTRAIT_URI = OF_PATH + '58e15977a9c1b11803b242b5';
 var LANDSCAPE_URI = OF_PATH + '58e15977a9c1b11803b242b5';
 
-var wrapEl = document.createElement('div');
-var portraitEl = document.createElement('div');
-var landscapeEl = document.createElement('div');
+// accuweather api
+var ACCUWEATHER_API_KEY = 'ZADT76zsY52YqATKgIZGAaGpe6rOjW7w';
+var LOCATION_CODE = '331530'; // madison
+var ACCUWEATHER_URI = 'http://dataservice.accuweather.com/currentconditions/v1/' + LOCATION_CODE + '?apikey=' + ACCUWEATHER_API_KEY;
+
+var body = document.getElementsByTagName('body')[0];
+var wrapEl = document.getElementById('wrap');
+var portraitEl = document.getElementById('portrait-art');
+var landscapeEl = document.getElementById('landscape-art');
 
 var portraitObj = void 0;
 var landscapeObj = void 0;
@@ -42,9 +49,11 @@ var getJson = function getJson() {
 };
 
 var jsonLoaded = function jsonLoaded(json) {
-  portraitObj = json[0].current_artwork;
-  landscapeObj = json[1].current_artwork;
-  draw();
+  if (json.length > 1) {
+    portraitObj = json[0].current_artwork;
+    landscapeObj = json[1].current_artwork;
+    draw();
+  }
 };
 
 var draw = function draw() {
@@ -55,14 +64,17 @@ var draw = function draw() {
   }, 5000);
 };
 
-wrapEl.id = "wrap";
-portraitEl.id = "portrait-art";
-landscapeEl.id = "landscape-art";
-
-// add to DOM
-wrapEl.appendChild(portraitEl);
-wrapEl.appendChild(landscapeEl);
-document.body.appendChild(wrapEl);
+// set colors based on night/day
+fetch(ACCUWEATHER_URI).then(function (resp) {
+  return resp.json();
+}).then(function (data) {
+  var dayTime = data[0].IsDayTime;
+  if (dayTime) {
+    body.classList.remove('night');
+  } else {
+    body.classList.add('night');
+  }
+});
 
 getJson().then(jsonLoaded);
 
@@ -1931,7 +1943,7 @@ module.exports = HandlebarsCompiler.template({"compiler":[7,">= 4.0.0"],"main":f
 
   return "<div class=\"bis-art\">\n  <figure><img src=\""
     + alias4(((helper = (helper = helpers.thumb_url || (depth0 != null ? depth0.thumb_url : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"thumb_url","hash":{},"data":data}) : helper)))
-    + "\"></figure>\n  <figcaption>\n    <h2 class=\"bis-title\">"
+    + "\"></figure>\n  <figcaption>\n    <h3 class=\"bis-title\">"
     + alias4(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data}) : helper)))
     + "</h1>\n    <span class=\"bis-author-name\">"
     + alias4(((helper = (helper = helpers.author_name || (depth0 != null ? depth0.author_name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"author_name","hash":{},"data":data}) : helper)))
