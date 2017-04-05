@@ -1,6 +1,14 @@
 @import "./node_modules/reset-css/reset.less";
 
 @transition-time: 200ms;
+@base-font-size: calc(100% + 0.25vw);
+@base-font-size-mobile: 130%;
+@base-line-height: 1.5em;
+
+html {
+  font-size: @base-font-size;
+  line-height: @base-line-height;
+}
 
 body {
   margin: 0;
@@ -8,7 +16,7 @@ body {
   background: #fff;
   color: #000;
   font-family: "Overpass", sans-serif;
-  line-height: 1.5em;
+  font-size: 1rem;
 
   transition: background @transition-time color @transition-time;
 }
@@ -51,7 +59,6 @@ svg#logo > * {
   margin-top: 2em;
 }
 .bis-main-description {
-  font-size: 120%;
   line-height: 1.5em;
   p:first-child {
     font-weight: 800;
@@ -79,9 +86,8 @@ svg#logo > * {
     max-width: 82vmin;
     margin: 5vmin auto;
     font-weight: 600;
-    // font-size: 3vmin;
-    font-size: 150%;
-    line-height: 1.2em;
+    font-size: 1.2rem;
+    line-height: 1.5em;
     background: #000;
     color: #fff;
     padding: 3vmin;
