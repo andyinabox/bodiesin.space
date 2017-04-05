@@ -13,17 +13,34 @@ var OF_PATH = 'https://api.openframe.io/v0/frames/';
 var PORTRAIT_URI = OF_PATH + '58e15977a9c1b11803b242b5';
 var LANDSCAPE_URI = OF_PATH + '58e15977a9c1b11803b242b5';
 
-fetch(PORTRAIT_URI).then(function (resp) {
-  return resp.json();
-}).then(function (data) {
-  return console.log(data);
-});
+var portraitArt = void 0;
+var landscapeArt = void 0;
 
-fetch(LANDSCAPE_URI).then(function (resp) {
-  return resp.json();
-}).then(function (data) {
-  return console.log(data);
-});
+var getJson = function getJson() {
+  var portraitPromise = fetch(PORTRAIT_URI).then(function (resp) {
+    return resp.json();
+  });
+  var landscapePromise = fetch(LANDSCAPE_URI).then(function (resp) {
+    return resp.json();
+  });
+
+  return _promisePolyfill2.default.all([portraitPromise, landscapePromise]);
+};
+
+var jsonLoaded = function jsonLoaded(json) {
+  portraitArt = json[0].current_artwork;
+  landscapeArt = json[1].current_artwork;
+  draw();
+};
+
+var draw = function draw() {
+  console.log(portraitArt, landscapeArt);
+  window.setTimeout(function () {
+    return getJson().then(jsonLoaded);
+  }, 5000);
+};
+
+getJson().then(jsonLoaded);
 
 },{"promise-polyfill":2,"whatwg-fetch":3}],2:[function(require,module,exports){
 (function (root) {
