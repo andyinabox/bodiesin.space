@@ -6,13 +6,20 @@ import 'whatwg-fetch';
 import Promise from 'promise-polyfill';
 import font from 'google-fonts';
 
+// openframe api
 const OF_PATH = 'https://api.openframe.io/v0/frames/';
 const PORTRAIT_URI = OF_PATH + '58e15977a9c1b11803b242b5';
 const LANDSCAPE_URI = OF_PATH + '58e15977a9c1b11803b242b5';
 
-const wrapEl = document.createElement('div');
-const portraitEl = document.createElement('div');
-const landscapeEl = document.createElement('div');
+// accuweather api
+const ACCUWEATHER_API_KEY = 'ZADT76zsY52YqATKgIZGAaGpe6rOjW7w';
+const LOCATION_CODE = '331530'; // madison
+const ACCUWEATHER_URI = 'http://dataservice.accuweather.com/currentconditions/v1/' + LOCATION_CODE + '?apikey=' + ACCUWEATHER_API_KEY;
+
+let body = document.getElementsByTagName('body')[0];
+let wrapEl = document.getElementById('wrap');
+let portraitEl = document.getElementById('portrait-art');
+let landscapeEl = document.getElementById('landscape-art');
 
 let portraitObj;
 let landscapeObj;
@@ -29,9 +36,11 @@ const getJson = () => {
 }
 
 const jsonLoaded = (json) => {
-  portraitObj = json[0].current_artwork;
-  landscapeObj = json[1].current_artwork;
-  draw();
+  if(json.length > 1) {
+    portraitObj = json[0].current_artwork;
+    landscapeObj = json[1].current_artwork;
+    draw();
+  }
 }
 
 const draw = () => {
@@ -40,14 +49,17 @@ const draw = () => {
   window.setTimeout(() => getJson().then(jsonLoaded), 5000);
 }
 
-wrapEl.id = "wrap";
-portraitEl.id = "portrait-art";
-landscapeEl.id = "landscape-art";
-
-// add to DOM
-wrapEl.appendChild(portraitEl);
-wrapEl.appendChild(landscapeEl);
-document.body.appendChild(wrapEl);
+// set colors based on night/day
+fetch(ACCUWEATHER_URI)
+  .then((resp) => resp.json())
+  .then((data) => {
+    const dayTime = data[0].IsDayTime;
+    if(dayTime) {
+      body.classList.remove('night');
+    } else {
+      body.classList.add('night');
+    }
+  });
 
 getJson().then(jsonLoaded);
 

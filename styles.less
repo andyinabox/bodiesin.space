@@ -1,12 +1,27 @@
 @import "./node_modules/reset-css/reset.less";
 
+@transition-time: 200ms;
 
 body {
   margin: 0;
   padding: 0;
   background: #fff;
+  color: #000;
   font-family: "Overpass", sans-serif;
   line-height: 1.5em;
+
+  transition: background @transition-time color @transition-time;
+}
+
+p {
+  margin-bottom: 1em;
+}
+
+h2 {
+  font-weight: 300;
+  font-size: 250%;
+  margin: 1em 0;
+  line-height: 1.2em;  
 }
 
 #wrap {
@@ -14,22 +29,59 @@ body {
   margin: auto;
 }
 
+#main {
+
+  padding: 3vmin;
+}
+
+svg#logo > * {
+  fill: #000;
+  transition: fill @transition-time;
+}
+
+#portait-art, #landscape-art {
+
+}
+
+.bis-main-title {
+
+}
+.bis-main-subtitle {
+  text-align: right;
+}
+.bis-main-description {
+  font-size: 120%;
+  line-height: 1.5em;
+  p:first-child {
+    font-weight: 800;
+  }
+}
+
+
 .bis-art {
   figure {
     max-width: 60vmin;
     padding: 10vmin;
-    border: 1px solid #ddd;
+    border: 4vmin solid #000;
     margin: 5vmin auto;
     img {
       max-width: 100%;
     }
+
+    transition: border-color @transition-time;
   }
 
   figcaption {
-    max-width: 80vmin;
+    max-width: 88vmin;
     margin: 5vmin auto;
     font-weight: 600;
     font-size: 3vmin;
+    line-height: 1.2em;
+    background: #000;
+    color: #fff;
+    padding: 3vmin;
+
+    transition: color @transition-time, background @transition-time;
 
     .bis-title {
       font-style: italic;
@@ -41,6 +93,27 @@ body {
 
     .bis-description {
       font-weight: 400;
+    }
+  }
+}
+
+
+body.night {
+  background: #000;
+  color: #fff;
+
+  svg#logo > * {
+    fill: #fff;
+  }
+
+  .bis-art {
+    figure {
+      border-color: #fff;
+    }
+
+    figcaption {
+      background: #fff;
+      color: #000;  
     }
   }
 }
