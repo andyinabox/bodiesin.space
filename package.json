@@ -1,0 +1,11 @@
+{
+  "name": "bodiesin.space",
+  "version": "0.0.1",
+  "description": "Website for InterArts and Technology exhibition at University of Wisconsin – Madison.",
+  "main": "index.js",
+  "repository": "git@github.com:andyinabox/bodiesin.space",
+  "author": "Andy Dayton <amdayton@gmail.com>",
+  "dependencies": {
+    "gh-pages": "^0.12.0"
+  }
+}
