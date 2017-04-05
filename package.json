@@ -7,7 +7,7 @@
   "author": "Andy Dayton <amdayton@gmail.com>",
   "scripts": {
     "start": "budo-less index.js --less styles.less -H localhost --live --open -- -t babelify -t hbsfy | garnish",
-    "build": "npm run styles; budo-demo index.js -c styles.css -m -- -t babelify -t hbsfy",
+    "build": "npm run styles; budo-demo index.js -c styles.css -m -i index.html -- -t babelify -t hbsfy",
     "styles": "lessc styles.less styles.css",
     "deploy": "npm run build; gh-pages -d dist; npm run clobber",
     "clobber": "rm -r dist; rm styles.css"
