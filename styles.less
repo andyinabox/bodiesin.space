@@ -1,0 +1,46 @@
+@import "./node_modules/reset-css/reset.less";
+
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  font-family: "Overpass", sans-serif;
+  line-height: 1.5em;
+}
+
+#wrap {
+  max-width: 600px;
+  margin: auto;
+}
+
+.bis-art {
+  figure {
+    max-width: 60vmin;
+    padding: 10vmin;
+    border: 1px solid #ddd;
+    margin: 5vmin auto;
+    img {
+      max-width: 100%;
+    }
+  }
+
+  figcaption {
+    max-width: 80vmin;
+    margin: 5vmin auto;
+    font-weight: 600;
+    font-size: 3vmin;
+
+    .bis-title {
+      font-style: italic;
+    }
+
+    .bis-author-name {
+      font-weight: 700;
+    }
+
+    .bis-description {
+      font-weight: 400;
+    }
+  }
+}

@@ -6,8 +6,8 @@
   "repository": "git@github.com:andyinabox/bodiesin.space",
   "author": "Andy Dayton <amdayton@gmail.com>",
   "scripts": {
-    "start": "budo-less index.js --less styles.less -H localhost --live --open -- -t babelify | garnish",
-    "build": "npm run styles; budo-demo index.js -c styles.css -m -- -t babelify",
+    "start": "budo-less index.js --less styles.less -H localhost --live --open -- -t babelify -t hbsfy | garnish",
+    "build": "npm run styles; budo-demo index.js -c styles.css -m -- -t babelify -t hbsfy",
     "styles": "lessc styles.less styles.css",
     "deploy": "npm run build; gh-pages -d dist; npm run clean",
     "clean": "rm -r dist; rm styles.css"
@@ -17,12 +17,16 @@
     "babelify": "^7.3.0",
     "budo-demo": "^0.1.3",
     "budo-less": "^1.0.1",
+    "garnish": "^5.2.0",
     "gh-pages": "^0.12.0",
-    "hbsify": "^1.0.1",
+    "handlebars": "^4.0.6",
+    "hbsfy": "^2.7.0",
     "less": "^2.7.2"
   },
   "dependencies": {
+    "google-fonts": "^1.0.0",
     "promise-polyfill": "^6.0.2",
+    "reset-css": "^2.2.0",
     "whatwg-fetch": "^2.0.3"
   }
 }
