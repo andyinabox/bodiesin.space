@@ -9,8 +9,8 @@
     "start": "budo-less index.js --less styles.less -H localhost --live --open -- -t babelify -t hbsfy | garnish",
     "build": "npm run styles; budo-demo index.js -c styles.css -m -- -t babelify -t hbsfy",
     "styles": "lessc styles.less styles.css",
-    "deploy": "npm run build; gh-pages -d dist; npm run clean",
-    "clean": "rm -r dist; rm styles.css"
+    "deploy": "npm run build; gh-pages -d dist; npm run clobber",
+    "clobber": "rm -r dist; rm styles.css"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.24.0",
