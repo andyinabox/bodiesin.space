@@ -18,7 +18,7 @@ var artTpl = require('./tpl/art.hbs');
 // openframe api
 var OF_PATH = 'https://api.openframe.io/v0/frames/';
 var PORTRAIT_URI = OF_PATH + '58e15977a9c1b11803b242b5';
-var LANDSCAPE_URI = OF_PATH + '58e15977a9c1b11803b242b5';
+var LANDSCAPE_URI = OF_PATH + '58e5466ab2462d7382b8f152';
 
 // accuweather api
 var ACCUWEATHER_API_KEY = 'ZADT76zsY52YqATKgIZGAaGpe6rOjW7w';
