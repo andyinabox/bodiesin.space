@@ -21,8 +21,23 @@ body {
   transition: background @transition-time color @transition-time;
 }
 
+a, a:link {
+  text-decoration: none;
+  border-bottom: .25vmin solid #000;
+  color: #000;
+}
+
+a:hover {
+  border-bottom: none;
+}
+
 p {
   margin-bottom: 1em;
+}
+
+strong {
+  font-weight: 800;
+  text-transform: uppercase;
 }
 
 h2 {
@@ -45,6 +60,23 @@ h2 {
 svg#logo > * {
   fill: #000;
   transition: fill @transition-time;
+}
+
+#exhibition-info {
+  max-width: 82vmin;
+  margin: 5vmin auto;
+  // font-weight: 600;
+  font-size: 1.2rem;
+  line-height: 1.5em;
+  background: #000;
+  color: #fff;
+  padding: 3vmin;
+
+  a {
+    color: #fff;
+    border-color: #fff;
+  }
+
 }
 
 #portait-art, #landscape-art {
@@ -126,5 +158,17 @@ body.night {
       background: #fff;
       color: #000;  
     }
+  }
+
+
+  #exhibition-info {
+    color: #000;
+    background: #fff;
+
+    a {
+      color: #000;
+      border-color: #000;
+    }
+
   }
 }
