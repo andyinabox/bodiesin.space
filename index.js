@@ -16,10 +16,12 @@ const ACCUWEATHER_API_KEY = 'ZADT76zsY52YqATKgIZGAaGpe6rOjW7w';
 const LOCATION_CODE = '331530'; // madison
 const ACCUWEATHER_URI = 'http://dataservice.accuweather.com/currentconditions/v1/' + LOCATION_CODE + '?apikey=' + ACCUWEATHER_API_KEY;
 
+const HASH_REGEX = /#([ab])/;
+
 let body = document.getElementsByTagName('body')[0];
 let wrapEl = document.getElementById('wrap');
-let portraitEl = document.getElementById('portrait-art');
-let landscapeEl = document.getElementById('landscape-art');
+let portraitEl = document.getElementById('a');
+let landscapeEl = document.getElementById('b');
 
 let portraitObj;
 let landscapeObj;
@@ -49,6 +51,34 @@ const draw = () => {
   window.setTimeout(() => getJson().then(jsonLoaded), 5000);
 }
 
+const removeSelected = () => {
+  let selected = document.querySelectorAll('.selected');
+  for(var el of selected) {
+    el.classList.remove('selected');
+  }
+}
+
+const handleHash = () => { 
+  if(HASH_REGEX.test(window.location.hash)) {
+    // counteract default hash behavior
+
+    let m = HASH_REGEX.exec(window.location.hash);
+    let selectEl = document.getElementById(m[1]);
+
+    // remove currently selected
+
+    removeSelected();
+
+    console.log(selectEl);
+
+    selectEl.classList.add('selected');
+
+    // hide when screen is tapped/clicked
+    document.body.addEventListener('click', removeSelected);
+
+  }
+}
+
 // set colors based on night/day
 fetch(ACCUWEATHER_URI)
   .then((resp) => resp.json())
@@ -63,3 +93,7 @@ fetch(ACCUWEATHER_URI)
 
 getJson().then(jsonLoaded);
 
+
+window.addEventListener('hashchange', handleHash);
+window.scrollTo(0, 0);
+handleHash();

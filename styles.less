@@ -63,7 +63,7 @@ svg#logo > * {
 }
 
 #exhibition-info {
-  max-width: 82vmin;
+  // max-width: 82vmin;
   margin: 5vmin auto;
   // font-weight: 600;
   font-size: 1.2rem;
@@ -79,9 +79,49 @@ svg#logo > * {
 
 }
 
-#portait-art, #landscape-art {
+.bis-art-container.selected {
+  background: #fff;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
 
+  .bis-art {
+    max-width: 60vmin;
+  }
+
+  &:after {
+    content: 'X CLOSE';
+    cursor: pointer;
+    position: fixed;
+    text-align: center;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    font-weight: 200;
+    font-size: 1.2rem;
+    padding: 1rem;
+    background: #fff;
+    opacity: 0.5;
+  }
 }
+
+// portrait
+#a.selected {
+  .bis-art {
+    max-width: 60vmin;
+  }
+}
+
+// landscape
+#b.selected {
+  .bis-art {
+    max-width: 80vmin;
+  }
+}
+
 
 .bis-main-title {
 
@@ -103,7 +143,7 @@ svg#logo > * {
   margin: 5vh auto 15vh;
 
   figure {
-    max-width: 60vmin;
+    // max-width: 60vmin;
     padding: 10vmin;
     border: 4vmin solid #000;
     margin: 5vmin auto;
@@ -115,7 +155,7 @@ svg#logo > * {
   }
 
   figcaption {
-    max-width: 82vmin;
+    // max-width: 82vmin;
     margin: 5vmin auto;
     font-weight: 600;
     font-size: 1.2rem;
@@ -160,6 +200,13 @@ body.night {
     }
   }
 
+  .bis-art-container.selected {
+    background: #000;
+
+    &:after {
+      background: #000;
+    }
+  }
 
   #exhibition-info {
     color: #000;
