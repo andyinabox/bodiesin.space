@@ -25,10 +25,12 @@ var ACCUWEATHER_API_KEY = 'ZADT76zsY52YqATKgIZGAaGpe6rOjW7w';
 var LOCATION_CODE = '331530'; // madison
 var ACCUWEATHER_URI = 'http://dataservice.accuweather.com/currentconditions/v1/' + LOCATION_CODE + '?apikey=' + ACCUWEATHER_API_KEY;
 
+var HASH_REGEX = /#([ab])/;
+
 var body = document.getElementsByTagName('body')[0];
 var wrapEl = document.getElementById('wrap');
-var portraitEl = document.getElementById('portrait-art');
-var landscapeEl = document.getElementById('landscape-art');
+var portraitEl = document.getElementById('a');
+var landscapeEl = document.getElementById('b');
 
 var portraitObj = void 0;
 var landscapeObj = void 0;
@@ -64,6 +66,54 @@ var draw = function draw() {
   }, 5000);
 };
 
+var removeSelected = function removeSelected() {
+  var selected = document.querySelectorAll('.selected');
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = selected[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var el = _step.value;
+
+      el.classList.remove('selected');
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator.return) {
+        _iterator.return();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
+};
+
+var handleHash = function handleHash() {
+  if (HASH_REGEX.test(window.location.hash)) {
+    // counteract default hash behavior
+
+    var m = HASH_REGEX.exec(window.location.hash);
+    var selectEl = document.getElementById(m[1]);
+
+    // remove currently selected
+
+    removeSelected();
+
+    console.log(selectEl);
+
+    selectEl.classList.add('selected');
+
+    // hide when screen is tapped/clicked
+    document.body.addEventListener('click', removeSelected);
+  }
+};
+
 // set colors based on night/day
 fetch(ACCUWEATHER_URI).then(function (resp) {
   return resp.json();
@@ -77,6 +127,10 @@ fetch(ACCUWEATHER_URI).then(function (resp) {
 });
 
 getJson().then(jsonLoaded);
+
+window.addEventListener('hashchange', handleHash);
+window.scrollTo(0, 0);
+handleHash();
 
 },{"./tpl/art.hbs":25,"google-fonts":2,"promise-polyfill":23,"whatwg-fetch":24}],2:[function(require,module,exports){
 module.exports = asString
